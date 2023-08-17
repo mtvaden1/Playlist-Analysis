@@ -2,3 +2,7 @@
 .cache-michael_vaden
 .env
 gfg.png
+build/lib/mvspotifyhelper/__init__.py
+build/lib/mvspotifyhelper/mvspotifyhelper.py
+mvspotifyhelper/__pycache__/__init__.cpython-39.pyc
+mvspotifyhelper/__pycache__/mvspotifyhelper.cpython-39.pyc
