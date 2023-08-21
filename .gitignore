@@ -6,3 +6,7 @@ build/lib/mvspotifyhelper/__init__.py
 build/lib/mvspotifyhelper/mvspotifyhelper.py
 mvspotifyhelper/__pycache__/__init__.cpython-39.pyc
 mvspotifyhelper/__pycache__/mvspotifyhelper.cpython-39.pyc
+adaboost1.pkl
+neuralnet1.pkl
+xgboost1.pkl
+forest1.pkl
