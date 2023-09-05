@@ -28,7 +28,7 @@ redirect_uri= 'https://www.virginia.edu/'
 client_credentials_manager = SpotifyClientCredentials(client_id=spot_id, client_secret=spot_secret)
 
 
-scope = "playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-modify"
+scope = "playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-library-modify user-library-read user-top-read"
 
 token = util.prompt_for_user_token(username, scope, spot_id, spot_secret, redirect_uri, show_dialog=True)
 
@@ -57,9 +57,37 @@ class MV():
             song_features = pd.concat([song_features, pd.json_normalize(sp.audio_features(track))])
 
         return df.merge(song_features, left_on='track.uri', right_on='uri')
+    
+    def add_song_genres(df):
+        df['genres'] = [sp.artist(pd.json_normalize(df['track.artists'][x])['id'][0])['genres'] for x in range(df.shape[0])]
+        return df
 
     def get_dominant_RGB(url):
         fd = urlopen(url)
         img= io.BytesIO(fd.read())
         c1 = ColorThief(img)
         return c1.get_color(quality=1)
+    
+    def get_liked_songs():
+        myjson = sp.current_user_saved_tracks()
+
+        tracks = myjson['items']
+
+        while myjson['next']:
+            myjson = sp.next(myjson)
+            tracks.extend(myjson['items'])
+
+        return pd.json_normalize(tracks)
+    
+    def get_playlist_recs(df):
+        seed_tracks = df['track.id'].tolist()
+
+        song_recs = pd.DataFrame()
+
+        for i in range(5,len(seed_tracks)+1,5):
+            recomms = sp.recommendations(seed_tracks = seed_tracks[i-5:i],limit = 5)
+            tracks = recomms['tracks']
+            
+            song_recs = pd.concat([song_recs, pd.json_normalize(tracks)])
+
+        song_recs['name']
