@@ -12,7 +12,7 @@ This repository contains multiple files, with the general purpose to classify so
 
 **weather_api_test.ipynb** a file that accesses the open weather map API to get the current weather based on my location.
 
-**generate_recs_test.ipynb**: Not a part of the project, but a file that helped me navigate the Spotify API and access and generate recommendations for my playlists
+**generate_recs_test.ipynb**: Not a part of the project, but a file that helped me navigate the Spotify API and access and generate recommendations for my playlists.
 
 **convert_library_to_colors.ipynb**: Not a part of the project, but a file where I started to explore the relationship between song and primary color of album art using ColorThief package.
 
